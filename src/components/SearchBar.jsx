@@ -5,7 +5,9 @@ export default class SearchBar extends Component {
     const { movies } = this.props;
 
     return (
-      <h1>searchBar</h1>
+      <forms data-testid="search-bar-form">
+        <h1>Forms</h1>
+      </forms>
     );
   }
 }
