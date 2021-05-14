@@ -12,9 +12,12 @@ export default class AddMovie extends Component {
       genre: 'action',
     };
   }
+
   render() {
     return(
-      <h1>aaa</h1>
-    )
+      <form data-testid="add-movie-form">
+        <h1>aa</h1>
+      </form>
+    );
   }
 }
