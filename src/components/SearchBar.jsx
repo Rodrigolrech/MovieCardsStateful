@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
 
 export default class SearchBar extends Component {
-  render() {
-    const { movies } = this.props;
+  constructor() {
+    super();
+    this.state = {
+      // searchText: '',
+    };
+  }
 
+  // onSearchTextChange(e) {
+  //   this.setState({
+  //     searchText: e.target.value,
+  //   });
+  // }
+
+  render() {
+    const { searchText,
+      onSearchTextChange,
+      bookmarkedOnly,
+      onBookmarkedChange,
+      selectedGenre,
+      onSelectedGenreChange
+    } = this.props;
     return (
-      <forms data-testid="search-bar-form">
-        <h1>Forms</h1>
-      </forms>
+      <form data-testid="search-bar-form">
+        <label data-testid="text-input-label" htmlFor="text-input">
+          Inclui o texto:
+          <input
+            type="text"
+            value={ searchText }
+            onChange={ onSearchTextChange }
+            data-testid="text-input"
+            name="text-input"
+          />
+        </label>
+      </form>
     );
   }
 }
