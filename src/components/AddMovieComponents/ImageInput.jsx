@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class SubtitleInput extends Component {
+export default class ImageInput extends Component {
   render() {
     const { value, onChange } = this.props;
     return (
-      <label data-testid="subtitle-input-label" htmlFor="subtitle">
-        Subtítulo
+      <label data-testid="image-input-label" htmlFor="imagePath">
+        Imagem
         <input
           type="text"
-          data-testid="subtitle-input"
-          name="subtitle"
+          data-testid="image-input"
+          name="imagePath"
           value={ value }
           onChange={ onChange }
         />
@@ -19,7 +19,7 @@ export default class SubtitleInput extends Component {
   }
 }
 
-SubtitleInput.propTypes = {
+ImageInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
