@@ -9,13 +9,30 @@ class MovieLibrary extends Component {
     super(props);
 
     const { movies } = this.props;
+    this.onSearchTextChange = this.onSearchTextChange.bind(this);
+    this.onBookmarkedChange = this.onBookmarkedChange.bind(this);
+    this.onSelectedGenreChange = this.onSelectedGenreChange.bind(this);
+    // this.filterMovies = this.filterMovies.bind(this);
 
     this.state = {
-      searchText: "",
+      searchText: '',
       bookMarkedOnly: false,
-      selectedGenre: "",
+      selectedGenre: '',
       movies,
+      filteredMovies: movies,
     };
+  }
+
+  onSearchTextChange(event) {
+    this.setState({ searchText: event.target.value });
+  }
+
+  onSelectedGenreChange(event) {
+    this.setState({ selectedGenre: event.target.value });
+  }
+
+  onBookmarkedChange(event) {
+    this.setState({ bookMarkedOnly: event.target.checked });
   }
 
   AddMovieFunction(state) {
@@ -23,12 +40,33 @@ class MovieLibrary extends Component {
   }
 
   render() {
-    const { movies } = this.props;
+    const { searchText, bookMarkedOnly, selectedGenre, movies } = this.state;
+    let filteredMovies = movies;
+    if (searchText !== '') {
+      filteredMovies = filteredMovies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchText.toLowerCase())
+        || movie.subtitle.toLowerCase().includes(searchText.toLowerCase())
+        || movie.storyline.toLowerCase().includes(searchText.toLowerCase());
+      });
+    }
+    if (selectedGenre !== '') {
+      filteredMovies = filteredMovies.filter((movie) => movie.genre === selectedGenre);
+    }
+    if (bookMarkedOnly !== false) {
+      filteredMovies = filteredMovies.filter((movie) => movie.bookmarked === true);
+    }
     return (
       <div>
         <h2> My awesome movie library </h2>
-        <SearchBar />
-        <MovieList movies={ movies } />
+        <SearchBar
+          searchText={ searchText }
+          bookMarkedOnly={ bookMarkedOnly }
+          selectedGenre={ selectedGenre }
+          onSearchTextChange={ this.onSearchTextChange }
+          onBookmarkedChange={ this.onBookmarkedChange }
+          onSelectedGenreChange={ this.onSelectedGenreChange }
+        />
+        <MovieList movies={ filteredMovies } />
         <AddMovie onClick={ this.AddMovieFunction } />
       </div>
     );
