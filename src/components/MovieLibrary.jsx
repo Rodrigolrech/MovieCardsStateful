@@ -12,14 +12,13 @@ class MovieLibrary extends Component {
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.onBookmarkedChange = this.onBookmarkedChange.bind(this);
     this.onSelectedGenreChange = this.onSelectedGenreChange.bind(this);
-    // this.filterMovies = this.filterMovies.bind(this);
+    this.AddMovieFunction = this.AddMovieFunction.bind(this);
 
     this.state = {
       searchText: '',
       bookMarkedOnly: false,
       selectedGenre: '',
       movies,
-      filteredMovies: movies,
     };
   }
 
@@ -36,7 +35,9 @@ class MovieLibrary extends Component {
   }
 
   AddMovieFunction(state) {
-    console.log(state);
+    const { movies } = this.state;
+    const newMovie = [state];
+    this.setState({ movies: movies.concat(newMovie) });
   }
 
   render() {

@@ -11,6 +11,7 @@ export default class StorylineInput extends Component {
           type="textarea"
           name="storyline"
           data-testid="storyline-input"
+          id="storyline"
           value={ value }
           onChange={ onChange }
         />
